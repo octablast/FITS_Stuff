@@ -10,7 +10,7 @@ with fits.open(fileLocation) as hdu:
     for i in range(l):
         if i>0:
             print(str(i)+' ASPCORR = ' +str(hdu[i].header['ASPCORR']))
-        if i>1 and hdu[i].header['ASPCORR'] == 'NONE':
+        if i>1 and hdu[i].header['ASPCORR'] == 'NONE' and hdu[i-1].header['ASPCORR'] == 'DIRECT':
             diff = (Time(hdu[i].header['DATE-OBS']).jd-
                   Time(hdu[i-1].header['DATE-OBS']).jd)*24*60
             print('Time difference (minutes) = ' +str(diff))
