@@ -3,7 +3,7 @@ from astropy.table import Table
 from astropy.time import Time
 
 
-fileLocation = '/home/quadblast24/PythonPrograms/sw00049929013uuu_sk.img'
+fileLocation = 'sw00049929013uuu_sk.img'
 with fits.open(fileLocation) as hdu:
     l = len(hdu)
     print('Checking ' + str(l-1) + ' extensions.')
@@ -15,11 +15,11 @@ with fits.open(fileLocation) as hdu:
                   Time(hdu[i-1].header['DATE-OBS']).jd)*24*60
             print('Time difference (minutes) = ' +str(diff))
             if diff < 60:
-                print('CDELT1/2 of '+str(i)+' replaced with CDELT1/2 of '+str(i-1))
-                fits.setval(fileLocation, 'CDELT1', value = hdu[i-1].header['CDELT1'], ext=i)
-                #print(str(hdu[i].header['CDELT1']) + ' changed to ' + str(hdu[i-1].header['CDELT1']))
-                fits.setval(fileLocation, 'CDELT2', value = hdu[i-1].header['CDELT2'], ext=i)
-                #print(str(hdu[i].header['CDELT2']) + ' changed to ' + str(hdu[i-1].header['CDELT2']))
+                print('CRVAL1/2 of '+str(i)+' replaced with CRVAL1/2 of '+str(i-1))
+                fits.setval(fileLocation, 'CRVAL1', value = hdu[i-1].header['CRVAL1'], ext=i)
+                #print(str(hdu[i].header['CRVAL1']) + ' changed to ' + str(hdu[i-1].header['CRVAL1']))
+                fits.setval(fileLocation, 'CRVAL2', value = hdu[i-1].header['CRVAL2'], ext=i)
+                #print(str(hdu[i].header['CRVAL2']) + ' changed to ' + str(hdu[i-1].header['CRVAL2']))
                 
                 
     
